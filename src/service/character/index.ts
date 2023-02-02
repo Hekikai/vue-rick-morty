@@ -1,22 +1,24 @@
-import BaseService from "@/service/api";
-import { ICharacter } from "@/types";
+import BaseService from '@/service/api'
+import { ICharacter } from '@/types'
 
 interface CharacterResponse {
-  info: {
-    count: number
-    next: string
-    pages: number
-    prev: string | null
-  },
-  results: Array<ICharacter>
+    info: {
+        count: number
+        next: string
+        pages: number
+        prev: string | null
+    }
+    results: Array<ICharacter>
 }
 
-class CharacterService extends BaseService{
-  async getAllCharacters(): Promise<CharacterResponse> {
-    const res = await fetch(`${this.BASE_PATH}/character/?count=10`)
-    const res1 = await res.json()
-    return res1.results
-  }
+class CharacterService extends BaseService {
+    async getAllCharacters(
+        page: number,
+    ): Promise<CharacterResponse['results']> {
+        const res = await fetch(`${this.BASE_PATH}/character/?page=${page}`)
+        const jsonRes = await res.json()
+        return jsonRes.results
+    }
 }
 
 export default new CharacterService() as CharacterService
