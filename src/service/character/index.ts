@@ -21,4 +21,4 @@ class CharacterService extends BaseService {
     }
 }
 
-export default new CharacterService() as CharacterService
+export default new CharacterService()
